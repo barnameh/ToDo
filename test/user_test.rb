@@ -5,13 +5,13 @@ class UserTest < Minitest::Test
     User
   end
 
-  def test_create_user
-    john = User.new(name: "John", email: "john@example.com")
+  def test_can_create_user
+    john = User.new(name: "John", email: "john@example1.com")
     assert john.save!
   end
 
   def test_name_is_required
-    john = User.new(email: "john@example.com")
+    john = User.new(email: "john@example2.com")
     assert_raises { john.save! }
   end
 
@@ -21,7 +21,14 @@ class UserTest < Minitest::Test
   end
 
   def test_email_format
-    john = User.new(name: "John", email: "john.example.com")
+    john = User.new(name: "John", email: "john.example3.com")
     assert_raises { john.save! }
+  end
+
+  def test_can_get_associated_lists
+    john = User.create!(name: "John", email: "john@example4.com")
+    List.create!(name: "shopping", user_id: john.id)
+    List.create!(name: "cleaning", user_id: john.id)
+    assert_equal 2, john.lists.count
   end
 end
