@@ -1,0 +1,16 @@
+
+<h2>Add a New User and Start Adding Task Lists</h2>
+
+<form action="/users" method="post">
+
+  <label for="user_name">Name</label>
+  <div class="well well-sm">
+    <input id="user_name" type="text" name="user[name]" value="<%= @user.name %>">
+  </div>
+  <label for="user_email">email</label>
+  <div class="well well-sm">
+  <input id="user_email" type="text" name="user[email]" value="<%= @user.email %>">
+  </div>
+
+  <input type="submit" value="Save">
+</form>
