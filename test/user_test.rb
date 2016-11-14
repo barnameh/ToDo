@@ -25,8 +25,14 @@ class UserTest < Minitest::Test
     assert_raises { john.save! }
   end
 
+  def test_email_uniqueness
+    User.create!(name: "Johnny", email: "john@example4.com")
+    john = User.new(name: "John", email: "john@example4.com")
+    assert_raises { john.save! }
+  end
+
   def test_can_get_associated_lists
-    john = User.create!(name: "John", email: "john@example4.com")
+    john = User.create!(name: "John", email: "john@example5.com")
     List.create!(name: "shopping", user_id: john.id)
     List.create!(name: "cleaning", user_id: john.id)
     assert_equal 2, john.lists.count
